@@ -38,7 +38,10 @@ contract OnlyOwnersGuard is BaseGuard {
         bytes memory,
         address msgSender
     ) external view override {
-        require(ISafe(msg.sender).isOwner(msgSender), "msg sender is not allowed to exec");
+        require(
+            ISafe(msg.sender).isOwner(msgSender),
+            "msg sender is not allowed to exec"
+        );
     }
 
     function checkAfterExecution(bytes32, bool) external view override {}

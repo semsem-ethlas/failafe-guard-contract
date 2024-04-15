@@ -8,6 +8,7 @@ contract AttestationGuardFactory is Ownable {
     event AttestationGuardCreated(address AttestationGuardAddr);
 
     constructor() Ownable(msg.sender) {}
+
     // Function to create a new ChildContract
     function createAttestationGuard(address attestationAuthority) public {
         AttestationGuard guardInstance = new AttestationGuard(

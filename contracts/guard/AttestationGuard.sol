@@ -5,6 +5,7 @@ import {Enum} from "../libraries/Enum.sol";
 import {BaseGuard} from "./GuardManager.sol";
 import {ISafe} from "../interfaces/ISafe.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+
 /**
  * @title OnlyOwnersGuard
  */
@@ -79,18 +80,18 @@ contract AttestationGuard is BaseGuard, Ownable {
         require(currentNonce > 0, "Invalid nonce for attestation guard");
 
         bytes32 txHash = ISafe(msg.sender).getTransactionHash( // Transaction info
-                to,
-                value,
-                data,
-                operation,
-                safeTxGas,
-                // Payment info
-                baseGas,
-                gasPrice,
-                gasToken,
-                refundReceiver,
-                (currentNonce - 1)
-            );
+            to,
+            value,
+            data,
+            operation,
+            safeTxGas,
+            // Payment info
+            baseGas,
+            gasPrice,
+            gasToken,
+            refundReceiver,
+            (currentNonce - 1)
+        );
 
         // attestation service performs addtional checks on the signners, i.e., geoloc, etc.
         require(
