@@ -11,7 +11,13 @@ import {IFallbackManager} from "./IFallbackManager.sol";
  * @author @safe-global/safe-protocol
  */
 interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
-    event SafeSetup(address indexed initiator, address[] owners, uint256 threshold, address initializer, address fallbackHandler);
+    event SafeSetup(
+        address indexed initiator,
+        address[] owners,
+        uint256 threshold,
+        address initializer,
+        address fallbackHandler
+    );
     event ApproveHash(bytes32 indexed approvedHash, address indexed owner);
     event SignMsg(bytes32 indexed msgHash);
     event ExecutionFailure(bytes32 indexed txHash, uint256 payment);
@@ -80,7 +86,9 @@ interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
      * @param signatures Signature data that should be verified.
      *                   Can be packed ECDSA signature ({bytes32 r}{bytes32 s}{uint8 v}), contract signature (EIP-1271) or approved hash.
      */
-    function checkSignatures(bytes32 dataHash, bytes memory signatures) external view;
+    function checkSignatures(bytes32 dataHash, bytes memory signatures)
+        external
+        view;
 
     /**
      * @notice Checks whether the signature provided is valid for the provided data and hash. Reverts otherwise.
@@ -89,7 +97,11 @@ interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
      *                   Can be packed ECDSA signature ({bytes32 r}{bytes32 s}{uint8 v}), contract signature (EIP-1271) or approved hash.
      * @dev This function makes it compatible with previous versions.
      */
-    function checkSignatures(bytes32 dataHash, bytes memory /* IGNORED */, bytes memory signatures) external view;
+    function checkSignatures(
+        bytes32 dataHash,
+        bytes memory /* IGNORED */,
+        bytes memory signatures
+    ) external view;
 
     /**
      * @notice Checks whether the signature provided is valid for the provided data and hash. Reverts otherwise.
@@ -102,7 +114,12 @@ interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
      *                   Can be packed ECDSA signature ({bytes32 r}{bytes32 s}{uint8 v}), contract signature (EIP-1271) or approved hash.
      * @param requiredSignatures Amount of required valid signatures.
      */
-    function checkNSignatures(address executor, bytes32 dataHash, bytes memory signatures, uint256 requiredSignatures) external view;
+    function checkNSignatures(
+        address executor,
+        bytes32 dataHash,
+        bytes memory signatures,
+        uint256 requiredSignatures
+    ) external view;
 
     /**
      * @notice Marks hash `hashToApprove` as approved.
@@ -167,7 +184,10 @@ interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
      * @param messageHash Hash of message that should be checked.
      * @return Number denoting if an owner signed the hash.
      */
-    function signedMessages(bytes32 messageHash) external view returns (uint256);
+    function signedMessages(bytes32 messageHash)
+        external
+        view
+        returns (uint256);
 
     /**
      * @notice Returns a uint if the messageHash is approved by the owner.
@@ -175,5 +195,8 @@ interface ISafe is IModuleManager, IOwnerManager, IFallbackManager {
      * @param messageHash Hash of message that should be checked.
      * @return Number denoting if an owner approved the hash.
      */
-    function approvedHashes(address owner, bytes32 messageHash) external view returns (uint256);
+    function approvedHashes(address owner, bytes32 messageHash)
+        external
+        view
+        returns (uint256);
 }

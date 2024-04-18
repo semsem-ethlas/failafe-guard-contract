@@ -79,5 +79,8 @@ interface IModuleManager is IGuardManager {
      * @return array Array of modules.
      * @return next Start of the next page.
      */
-    function getModulesPaginated(address start, uint256 pageSize) external view returns (address[] memory array, address next);
+    function getModulesPaginated(address start, uint256 pageSize)
+        external
+        view
+        returns (address[] memory array, address next);
 }
