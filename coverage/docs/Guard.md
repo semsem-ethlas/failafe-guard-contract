@@ -1,12 +1,13 @@
 # Guard Interface (Guard.sol)
 
-View Source: [\notForAudit_test_cases\contracts\base\GuardManager.sol](..\notForAudit_test_cases\contracts\base\GuardManager.sol)
+View Source: [/notForAudit_test_cases/contracts/base/GuardManager.sol](../notForAudit_test_cases/contracts/base/GuardManager.sol)
 
 **↗ Extends: [IERC165](IERC165.md)**
 
 **Guard**
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -33,19 +34,19 @@ function checkTransaction(address to, uint256 value, bytes data, enum Enum.Opera
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | The address to which the transaction is intended. | 
-| value | uint256 | The value of the transaction in Wei. | 
-| data | bytes | The transaction data. | 
-| operation | enum Enum.Operation | The type of operation of the transaction. | 
-| safeTxGas | uint256 | Gas used for the transaction. | 
-| baseGas | uint256 | The base gas for the transaction. | 
-| gasPrice | uint256 | The price of gas in Wei for the transaction. | 
-| gasToken | address | The token used to pay for gas. | 
-| refundReceiver | address payable | The address which should receive the refund. | 
-| signatures | bytes | The signatures of the transaction. | 
-| msgSender | address | The address of the message sender. | 
+| Name           | Type                | Description                                       |
+| -------------- | ------------------- | ------------------------------------------------- |
+| to             | address             | The address to which the transaction is intended. |
+| value          | uint256             | The value of the transaction in Wei.              |
+| data           | bytes               | The transaction data.                             |
+| operation      | enum Enum.Operation | The type of operation of the transaction.         |
+| safeTxGas      | uint256             | Gas used for the transaction.                     |
+| baseGas        | uint256             | The base gas for the transaction.                 |
+| gasPrice       | uint256             | The price of gas in Wei for the transaction.      |
+| gasToken       | address             | The token used to pay for gas.                    |
+| refundReceiver | address payable     | The address which should receive the refund.      |
+| signatures     | bytes               | The signatures of the transaction.                |
+| msgSender      | address             | The address of the message sender.                |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -65,6 +66,7 @@ function checkTransaction(
         address msgSender
     ) external;
 ```
+
 </details>
 
 ### checkModuleTransaction
@@ -78,13 +80,13 @@ returns(moduleTxHash bytes32)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | The address to which the transaction is intended. | 
-| value | uint256 | The value of the transaction in Wei. | 
-| data | bytes | The transaction data. | 
-| operation | enum Enum.Operation | The type of operation of the transaction. | 
-| module | address | The module involved in the transaction. | 
+| Name      | Type                | Description                                       |
+| --------- | ------------------- | ------------------------------------------------- |
+| to        | address             | The address to which the transaction is intended. |
+| value     | uint256             | The value of the transaction in Wei.              |
+| data      | bytes               | The transaction data.                             |
+| operation | enum Enum.Operation | The type of operation of the transaction.         |
+| module    | address             | The module involved in the transaction.           |
 
 **Returns**
 
@@ -102,6 +104,7 @@ function checkModuleTransaction(
         address module
     ) external returns (bytes32 moduleTxHash);
 ```
+
 </details>
 
 ### checkAfterExecution
@@ -114,10 +117,10 @@ function checkAfterExecution(bytes32 hash, bool success) external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| hash | bytes32 | The hash of the transaction. | 
-| success | bool | The status of the transaction execution. | 
+| Name    | Type    | Description                              |
+| ------- | ------- | ---------------------------------------- |
+| hash    | bytes32 | The hash of the transaction.             |
+| success | bool    | The status of the transaction execution. |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -125,6 +128,7 @@ function checkAfterExecution(bytes32 hash, bool success) external nonpayable
 ```javascript
 function checkAfterExecution(bytes32 hash, bool success) external;
 ```
+
 </details>
 
 ### supportsInterface
@@ -136,9 +140,9 @@ returns(bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| interfaceId | bytes4 |  | 
+| Name        | Type   | Description |
+| ----------- | ------ | ----------- |
+| interfaceId | bytes4 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -150,19 +154,20 @@ function supportsInterface(bytes4 interfaceId) external view virtual override re
             interfaceId == type(IERC165).interfaceId; // 0x01ffc9a7
     }
 ```
+
 </details>
 
 ### setGuard
 
 ```solidity
-function setGuard(address guard) external nonpayable authorized 
+function setGuard(address guard) external nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| guard | address |  | 
+| Name  | Type    | Description |
+| ----- | ------- | ----------- |
+| guard | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -179,14 +184,15 @@ function setGuard(address guard) external override authorized {
         emit ChangedGuard(guard);
     }
 ```
+
 </details>
 
 ### getGuard
 
 Internal method to retrieve the current guard
-      We do not have a public method because we're short on bytecode size limit,
-      to retrieve the guard address, one can use `getStorageAt` from `StorageAccessible` contract
-      with the slot `GUARD_STORAGE_SLOT`
+We do not have a public method because we're short on bytecode size limit,
+to retrieve the guard address, one can use `getStorageAt` from `StorageAccessible` contract
+with the slot `GUARD_STORAGE_SLOT`
 
 ```solidity
 function getGuard() internal view
@@ -195,8 +201,8 @@ returns(guard address)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -211,37 +217,38 @@ function getGuard() internal view returns (address guard) {
         /* solhint-enable no-inline-assembly */
     }
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

@@ -1,6 +1,6 @@
 # IOwnerManager - Interface for contract which manages Safe owners and a threshold to authorize transactions. (IOwnerManager.sol)
 
-View Source: [\notForAudit_test_cases\contracts\interfaces\IOwnerManager.sol](..\notForAudit_test_cases\contracts\interfaces\IOwnerManager.sol)
+View Source: [/notForAudit_test_cases/contracts/interfaces/IOwnerManager.sol](../notForAudit_test_cases/contracts/interfaces/IOwnerManager.sol)
 
 **↘ Derived Contracts: [ISafe](ISafe.md), [OwnerManager](OwnerManager.md)**
 
@@ -16,10 +16,10 @@ event ChangedThreshold(uint256  threshold);
 
 ## Functions
 
-- [addOwnerWithThreshold(address owner, uint256 _threshold)](#addownerwiththreshold)
-- [removeOwner(address prevOwner, address owner, uint256 _threshold)](#removeowner)
+- [addOwnerWithThreshold(address owner, uint256 /\_threshold)](#addownerwiththreshold)
+- [removeOwner(address prevOwner, address owner, uint256 /\_threshold)](#removeowner)
 - [swapOwner(address prevOwner, address oldOwner, address newOwner)](#swapowner)
-- [changeThreshold(uint256 _threshold)](#changethreshold)
+- [changeThreshold(uint256 /\_threshold)](#changethreshold)
 - [getThreshold()](#getthreshold)
 - [isOwner(address owner)](#isowner)
 - [getOwners()](#getowners)
@@ -34,10 +34,10 @@ function addOwnerWithThreshold(address owner, uint256 _threshold) external nonpa
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| owner | address | New owner address. | 
-| _threshold | uint256 | New threshold. | 
+| Name         | Type    | Description        |
+| ------------ | ------- | ------------------ |
+| owner        | address | New owner address. |
+| /\_threshold | uint256 | New threshold.     |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -45,6 +45,7 @@ function addOwnerWithThreshold(address owner, uint256 _threshold) external nonpa
 ```javascript
 function addOwnerWithThreshold(address owner, uint256 _threshold) external;
 ```
+
 </details>
 
 ### removeOwner
@@ -57,11 +58,11 @@ function removeOwner(address prevOwner, address owner, uint256 _threshold) exter
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| prevOwner | address | Owner that pointed to the owner to be removed in the linked list | 
-| owner | address | Owner address to be removed. | 
-| _threshold | uint256 | New threshold. | 
+| Name         | Type    | Description                                                      |
+| ------------ | ------- | ---------------------------------------------------------------- |
+| prevOwner    | address | Owner that pointed to the owner to be removed in the linked list |
+| owner        | address | Owner address to be removed.                                     |
+| /\_threshold | uint256 | New threshold.                                                   |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -73,6 +74,7 @@ function removeOwner(
         uint256 _threshold
     ) external;
 ```
+
 </details>
 
 ### swapOwner
@@ -85,11 +87,11 @@ function swapOwner(address prevOwner, address oldOwner, address newOwner) extern
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| prevOwner | address | Owner that pointed to the owner to be replaced in the linked list | 
-| oldOwner | address | Owner address to be replaced. | 
-| newOwner | address | New owner address. | 
+| Name      | Type    | Description                                                       |
+| --------- | ------- | ----------------------------------------------------------------- |
+| prevOwner | address | Owner that pointed to the owner to be replaced in the linked list |
+| oldOwner  | address | Owner address to be replaced.                                     |
+| newOwner  | address | New owner address.                                                |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -101,6 +103,7 @@ function swapOwner(
         address newOwner
     ) external;
 ```
+
 </details>
 
 ### changeThreshold
@@ -113,9 +116,9 @@ function changeThreshold(uint256 _threshold) external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _threshold | uint256 | New threshold. | 
+| Name         | Type    | Description    |
+| ------------ | ------- | -------------- |
+| /\_threshold | uint256 | New threshold. |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -123,6 +126,7 @@ function changeThreshold(uint256 _threshold) external nonpayable
 ```javascript
 function changeThreshold(uint256 _threshold) external;
 ```
+
 </details>
 
 ### getThreshold
@@ -136,8 +140,8 @@ returns(uint256)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -145,6 +149,7 @@ returns(uint256)
 ```javascript
 function getThreshold() external view returns (uint256);
 ```
+
 </details>
 
 ### isOwner
@@ -158,9 +163,9 @@ returns(bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| owner | address |  | 
+| Name  | Type    | Description |
+| ----- | ------- | ----------- |
+| owner | address |             |
 
 **Returns**
 
@@ -172,6 +177,7 @@ Boolean if owner is an owner of the Safe.
 ```javascript
 function isOwner(address owner) external view returns (bool);
 ```
+
 </details>
 
 ### getOwners
@@ -185,8 +191,8 @@ returns(address[])
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -194,37 +200,38 @@ returns(address[])
 ```javascript
 function getOwners() external view returns (address[] memory);
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

@@ -1,26 +1,19 @@
 # Safe - A multisignature wallet with support for confirmations using signed messages based on EIP-712. (Safe.sol)
 
-View Source: [\notForAudit_test_cases\contracts\Safe.sol](..\notForAudit_test_cases\contracts\Safe.sol)
+View Source: [/notForAudit_test_cases/contracts/Safe.sol](../notForAudit_test_cases/contracts/Safe.sol)
 
 **↗ Extends: [Singleton](Singleton.md), [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md), [ModuleManager](ModuleManager.md), [OwnerManager](OwnerManager.md), [SignatureDecoder](SignatureDecoder.md), [SecuredTokenTransfer](SecuredTokenTransfer.md), [ISignatureValidatorConstants](ISignatureValidatorConstants.md), [FallbackManager](FallbackManager.md), [StorageAccessible](StorageAccessible.md), [ISafe](ISafe.md)**
 **↘ Derived Contracts: [SafeL2](SafeL2.md)**
 
 **Safe**
 
-Most important concepts:
-      - Threshold: Number of required confirmations for a Safe transaction.
-      - Owners: List of addresses that control the Safe. They are the only ones that can add/remove owners, change the threshold and
-        approve transactions. Managed in `OwnerManager`.
-      - Transaction Hash: Hash of a transaction is calculated using the EIP-712 typed structured data hashing scheme.
-      - Nonce: Each transaction should have a different nonce to prevent replay attacks.
-      - Signature: A valid signature of an owner of the Safe for a transaction hash.
-      - Guard: Guard is a contract that can execute pre- and post- transaction checks. Managed in `GuardManager`.
-      - Modules: Modules are contracts that can be used to extend the write functionality of a Safe. Managed in `ModuleManager`.
-      - Fallback: Fallback handler is a contract that can provide additional read-only functional for Safe. Managed in `FallbackManager`.
-      Note: This version of the implementation contract doesn't emit events for the sake of gas efficiency and therefore requires a tracing node for indexing/
-      For the events-based implementation see `SafeL2.sol`.
+Most important concepts: - Threshold: Number of required confirmations for a Safe transaction. - Owners: List of addresses that control the Safe. They are the only ones that can add/remove owners, change the threshold and
+approve transactions. Managed in `OwnerManager`. - Transaction Hash: Hash of a transaction is calculated using the EIP-712 typed structured data hashing scheme. - Nonce: Each transaction should have a different nonce to prevent replay attacks. - Signature: A valid signature of an owner of the Safe for a transaction hash. - Guard: Guard is a contract that can execute pre- and post- transaction checks. Managed in `GuardManager`. - Modules: Modules are contracts that can be used to extend the write functionality of a Safe. Managed in `ModuleManager`. - Fallback: Fallback handler is a contract that can provide additional read-only functional for Safe. Managed in `FallbackManager`.
+Note: This version of the implementation contract doesn't emit events for the sake of gas efficiency and therefore requires a tracing node for indexing/
+For the events-based implementation see `SafeL2.sol`.
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -40,7 +33,7 @@ bytes32 private _deprecatedDomainSeparator;
 ## Functions
 
 - [constructor()](#)
-- [setup(address[] _owners, uint256 _threshold, address to, bytes data, address fallbackHandler, address paymentToken, uint256 payment, address payable paymentReceiver)](#setup)
+- [setup(address[] \_owners, uint256 \_threshold, address to, bytes data, address fallbackHandler, address paymentToken, uint256 payment, address payable paymentReceiver)](#setup)
 - [execTransaction(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address payable refundReceiver, bytes signatures)](#exectransaction)
 - [handlePayment(uint256 gasUsed, uint256 baseGas, uint256 gasPrice, address gasToken, address payable refundReceiver)](#handlepayment)
 - [checkContractSignature(address owner, bytes32 dataHash, bytes signatures, uint256 offset)](#checkcontractsignature)
@@ -49,11 +42,11 @@ bytes32 private _deprecatedDomainSeparator;
 - [checkNSignatures(address executor, bytes32 dataHash, bytes signatures, uint256 requiredSignatures)](#checknsignatures)
 - [approveHash(bytes32 hashToApprove)](#approvehash)
 - [domainSeparator()](#domainseparator)
-- [encodeTransactionData(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, uint256 _nonce)](#encodetransactiondata)
-- [getTransactionHash(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, uint256 _nonce)](#gettransactionhash)
+- [encodeTransactionData(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, uint256 \_nonce)](#encodetransactiondata)
+- [getTransactionHash(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, uint256 \_nonce)](#gettransactionhash)
 - [addNonce()](#addnonce)
 
-### 
+###
 
 ```solidity
 function () public nonpayable
@@ -61,8 +54,8 @@ function () public nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -77,6 +70,7 @@ constructor() {
         threshold = 1;
     }
 ```
+
 </details>
 
 ### setup
@@ -87,16 +81,16 @@ function setup(address[] _owners, uint256 _threshold, address to, bytes data, ad
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _owners | address[] |  | 
-| _threshold | uint256 |  | 
-| to | address |  | 
-| data | bytes |  | 
-| fallbackHandler | address |  | 
-| paymentToken | address |  | 
-| payment | uint256 |  | 
-| paymentReceiver | address payable |  | 
+| Name            | Type            | Description |
+| --------------- | --------------- | ----------- |
+| \_owners        | address[]       |             |
+| \_threshold     | uint256         |             |
+| to              | address         |             |
+| data            | bytes           |             |
+| fallbackHandler | address         |             |
+| paymentToken    | address         |             |
+| payment         | uint256         |             |
+| paymentReceiver | address payable |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -127,6 +121,7 @@ function setup(
         emit SafeSetup(msg.sender, _owners, _threshold, to, fallbackHandler);
     }
 ```
+
 </details>
 
 ### execTransaction
@@ -138,18 +133,18 @@ returns(success bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address |  | 
-| value | uint256 |  | 
-| data | bytes |  | 
-| operation | enum Enum.Operation |  | 
-| safeTxGas | uint256 |  | 
-| baseGas | uint256 |  | 
-| gasPrice | uint256 |  | 
-| gasToken | address |  | 
-| refundReceiver | address payable |  | 
-| signatures | bytes |  | 
+| Name           | Type                | Description |
+| -------------- | ------------------- | ----------- |
+| to             | address             |             |
+| value          | uint256             |             |
+| data           | bytes               |             |
+| operation      | enum Enum.Operation |             |
+| safeTxGas      | uint256             |             |
+| baseGas        | uint256             |             |
+| gasPrice       | uint256             |             |
+| gasToken       | address             |             |
+| refundReceiver | address payable     |             |
+| signatures     | bytes               |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -251,6 +246,7 @@ function execTransaction(
         }
     }
 ```
+
 </details>
 
 ### handlePayment
@@ -264,13 +260,13 @@ returns(payment uint256)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| gasUsed | uint256 | Gas used by the Safe transaction. | 
-| baseGas | uint256 | Gas costs that are independent of the transaction execution (e.g. base transaction fee, signature check, payment of the refund). | 
-| gasPrice | uint256 | Gas price that should be used for the payment calculation. | 
-| gasToken | address | Token address (or 0 if ETH) that is used for the payment. | 
-| refundReceiver | address payable |  | 
+| Name           | Type            | Description                                                                                                                      |
+| -------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| gasUsed        | uint256         | Gas used by the Safe transaction.                                                                                                |
+| baseGas        | uint256         | Gas costs that are independent of the transaction execution (e.g. base transaction fee, signature check, payment of the refund). |
+| gasPrice       | uint256         | Gas price that should be used for the payment calculation.                                                                       |
+| gasToken       | address         | Token address (or 0 if ETH) that is used for the payment.                                                                        |
+| refundReceiver | address payable |                                                                                                                                  |
 
 **Returns**
 
@@ -305,6 +301,7 @@ function handlePayment(
         }
     }
 ```
+
 </details>
 
 ### checkContractSignature
@@ -317,12 +314,12 @@ function checkContractSignature(address owner, bytes32 dataHash, bytes signature
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| owner | address | Address of the owner used to sign the message | 
-| dataHash | bytes32 | Hash of the data (could be either a message hash or transaction hash) | 
-| signatures | bytes | Signature data that should be verified. | 
-| offset | uint256 | Offset to the start of the contract signature in the signatures byte array | 
+| Name       | Type    | Description                                                                |
+| ---------- | ------- | -------------------------------------------------------------------------- |
+| owner      | address | Address of the owner used to sign the message                              |
+| dataHash   | bytes32 | Hash of the data (could be either a message hash or transaction hash)      |
+| signatures | bytes   | Signature data that should be verified.                                    |
+| offset     | uint256 | Offset to the start of the contract signature in the signatures byte array |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -366,6 +363,7 @@ function checkContractSignature(
         ) revertWithError("GS024");
     }
 ```
+
 </details>
 
 ### checkSignatures
@@ -376,10 +374,10 @@ function checkSignatures(bytes32 dataHash, bytes signatures) public view
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| dataHash | bytes32 |  | 
-| signatures | bytes |  | 
+| Name       | Type    | Description |
+| ---------- | ------- | ----------- |
+| dataHash   | bytes32 |             |
+| signatures | bytes   |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -392,6 +390,7 @@ function checkSignatures(
         checkSignatures(dataHash, "", signatures);
     }
 ```
+
 </details>
 
 ### checkSignatures
@@ -402,11 +401,11 @@ function checkSignatures(bytes32 dataHash, bytes , bytes signatures) public view
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| dataHash | bytes32 |  | 
-|  | bytes |  | 
-| signatures | bytes |  | 
+| Name       | Type    | Description |
+| ---------- | ------- | ----------- |
+| dataHash   | bytes32 |             |
+|            | bytes   |             |
+| signatures | bytes   |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -424,6 +423,7 @@ function checkSignatures(
         checkNSignatures(msg.sender, dataHash, signatures, _threshold);
     }
 ```
+
 </details>
 
 ### checkNSignatures
@@ -434,12 +434,12 @@ function checkNSignatures(address executor, bytes32 dataHash, bytes signatures, 
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| executor | address |  | 
-| dataHash | bytes32 |  | 
-| signatures | bytes |  | 
-| requiredSignatures | uint256 |  | 
+| Name               | Type    | Description |
+| ------------------ | ------- | ----------- |
+| executor           | address |             |
+| dataHash           | bytes32 |             |
+| signatures         | bytes   |             |
+| requiredSignatures | uint256 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -499,7 +499,7 @@ function checkNSignatures(
                 currentOwner = ecrecover(
                     keccak256(
                         abi.encodePacked(
-                            "\x19Ethereum Signed Message:\n32",
+                            "/x19Ethereum Signed Message:/n32",
                             dataHash
                         )
                     ),
@@ -521,6 +521,7 @@ function checkNSignatures(
         }
     }
 ```
+
 </details>
 
 ### approveHash
@@ -531,9 +532,9 @@ function approveHash(bytes32 hashToApprove) external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| hashToApprove | bytes32 |  | 
+| Name          | Type    | Description |
+| ------------- | ------- | ----------- |
+| hashToApprove | bytes32 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -545,6 +546,7 @@ function approveHash(bytes32 hashToApprove) external override {
         emit ApproveHash(hashToApprove, msg.sender);
     }
 ```
+
 </details>
 
 ### domainSeparator
@@ -556,8 +558,8 @@ returns(bytes32)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -575,6 +577,7 @@ function domainSeparator() public view override returns (bytes32) {
         return keccak256(abi.encode(DOMAIN_SEPARATOR_TYPEHASH, chainId, this));
     }
 ```
+
 </details>
 
 ### encodeTransactionData
@@ -588,18 +591,18 @@ returns(bytes)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | Destination address. | 
-| value | uint256 | Ether value. | 
-| data | bytes | Data payload. | 
-| operation | enum Enum.Operation | Operation type. | 
-| safeTxGas | uint256 | Gas that should be used for the safe transaction. | 
-| baseGas | uint256 | Gas costs for that are independent of the transaction execution(e.g. base transaction fee, signature check, payment of the refund) | 
-| gasPrice | uint256 | Maximum gas price that should be used for this transaction. | 
-| gasToken | address | Token address (or 0 if ETH) that is used for the payment. | 
-| refundReceiver | address | Address of receiver of gas payment (or 0 if tx.origin). | 
-| _nonce | uint256 | Transaction nonce. | 
+| Name           | Type                | Description                                                                                                                        |
+| -------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| to             | address             | Destination address.                                                                                                               |
+| value          | uint256             | Ether value.                                                                                                                       |
+| data           | bytes               | Data payload.                                                                                                                      |
+| operation      | enum Enum.Operation | Operation type.                                                                                                                    |
+| safeTxGas      | uint256             | Gas that should be used for the safe transaction.                                                                                  |
+| baseGas        | uint256             | Gas costs for that are independent of the transaction execution(e.g. base transaction fee, signature check, payment of the refund) |
+| gasPrice       | uint256             | Maximum gas price that should be used for this transaction.                                                                        |
+| gasToken       | address             | Token address (or 0 if ETH) that is used for the payment.                                                                          |
+| refundReceiver | address             | Address of receiver of gas payment (or 0 if tx.origin).                                                                            |
+| \_nonce        | uint256             | Transaction nonce.                                                                                                                 |
 
 **Returns**
 
@@ -645,6 +648,7 @@ function encodeTransactionData(
             );
     }
 ```
+
 </details>
 
 ### getTransactionHash
@@ -656,18 +660,18 @@ returns(bytes32)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address |  | 
-| value | uint256 |  | 
-| data | bytes |  | 
-| operation | enum Enum.Operation |  | 
-| safeTxGas | uint256 |  | 
-| baseGas | uint256 |  | 
-| gasPrice | uint256 |  | 
-| gasToken | address |  | 
-| refundReceiver | address |  | 
-| _nonce | uint256 |  | 
+| Name           | Type                | Description |
+| -------------- | ------------------- | ----------- |
+| to             | address             |             |
+| value          | uint256             |             |
+| data           | bytes               |             |
+| operation      | enum Enum.Operation |             |
+| safeTxGas      | uint256             |             |
+| baseGas        | uint256             |             |
+| gasPrice       | uint256             |             |
+| gasToken       | address             |             |
+| refundReceiver | address             |             |
+| \_nonce        | uint256             |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -702,6 +706,7 @@ function getTransactionHash(
             );
     }
 ```
+
 </details>
 
 ### addNonce
@@ -713,8 +718,8 @@ returns(success bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -724,37 +729,38 @@ function addNonce() public payable virtual returns (bool success) {
         nonce++;
     }
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

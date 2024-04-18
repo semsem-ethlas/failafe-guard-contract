@@ -1,6 +1,6 @@
 # Module Manager - A contract managing Safe modules (ModuleManager.sol)
 
-View Source: [\notForAudit_test_cases\contracts\base\ModuleManager.sol](..\notForAudit_test_cases\contracts\base\ModuleManager.sol)
+View Source: [/notForAudit_test_cases/contracts/base/ModuleManager.sol](../notForAudit_test_cases/contracts/base/ModuleManager.sol)
 
 **↗ Extends: [SelfAuthorized](SelfAuthorized.md), [Executor](Executor.md), [GuardManager](GuardManager.md), [IModuleManager](IModuleManager.md)**
 **↘ Derived Contracts: [Safe](Safe.md)**
@@ -8,11 +8,12 @@ View Source: [\notForAudit_test_cases\contracts\base\ModuleManager.sol](..\notFo
 **ModuleManager**
 
 Modules are extensions with unlimited access to a Safe that can be added to a Safe by its owners.
-⚠️ WARNING: Modules are a security risk since they can execute arbitrary transactions, 
+⚠️ WARNING: Modules are a security risk since they can execute arbitrary transactions,
 so only trusted and audited modules should be added to a Safe. A malicious module can
 completely takeover a Safe.
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -37,7 +38,7 @@ mapping(address => address) internal modules;
 ### setupModules
 
 Setup function sets the initial storage of the contract.
-         Optionally executes a delegate call to another contract to setup the modules.
+Optionally executes a delegate call to another contract to setup the modules.
 
 ```solidity
 function setupModules(address to, bytes data) internal nonpayable
@@ -45,10 +46,10 @@ function setupModules(address to, bytes data) internal nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | Optional destination address of call to execute. | 
-| data | bytes | Optional data of call to execute. | 
+| Name | Type    | Description                                      |
+| ---- | ------- | ------------------------------------------------ |
+| to   | address | Optional destination address of call to execute. |
+| data | bytes   | Optional data of call to execute.                |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -65,6 +66,7 @@ tion setupModules(address to, bytes memory data) internal {
     }
 
 ```
+
 </details>
 
 ### preModuleExecution
@@ -78,12 +80,12 @@ returns(guard address, guardHash bytes32)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | Target address of module transaction. | 
-| value | uint256 | Ether value of module transaction. | 
-| data | bytes | Data payload of module transaction. | 
-| operation | enum Enum.Operation | Operation type of module transaction. | 
+| Name      | Type                | Description                           |
+| --------- | ------------------- | ------------------------------------- |
+| to        | address             | Target address of module transaction. |
+| value     | uint256             | Ether value of module transaction.    |
+| data      | bytes               | Data payload of module transaction.   |
+| operation | enum Enum.Operation | Operation type of module transaction. |
 
 **Returns**
 
@@ -110,6 +112,7 @@ tion preModuleExecution(
     }
 
 ```
+
 </details>
 
 ### postModuleExecution
@@ -122,11 +125,11 @@ function postModuleExecution(address guard, bytes32 guardHash, bool success) int
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| guard | address | Hash Hash returned from the guard during pre execution check. | 
-| guardHash | bytes32 | Hash returned from the guard during pre execution check. | 
-| success | bool | Boolean flag indicating if the call succeeded. | 
+| Name      | Type    | Description                                                   |
+| --------- | ------- | ------------------------------------------------------------- |
+| guard     | address | Hash Hash returned from the guard during pre execution check. |
+| guardHash | bytes32 | Hash returned from the guard during pre execution check.      |
+| success   | bool    | Boolean flag indicating if the call succeeded.                |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -141,19 +144,20 @@ tion postModuleExecution(address guard, bytes32 guardHash, bool success) interna
     }
 
 ```
+
 </details>
 
 ### enableModule
 
 ```solidity
-function enableModule(address module) public nonpayable authorized 
+function enableModule(address module) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| module | address |  | 
+| Name   | Type    | Description |
+| ------ | ------- | ----------- |
+| module | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -170,20 +174,21 @@ tion enableModule(address module) public override authorized {
     }
 
 ```
+
 </details>
 
 ### disableModule
 
 ```solidity
-function disableModule(address prevModule, address module) public nonpayable authorized 
+function disableModule(address prevModule, address module) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| prevModule | address |  | 
-| module | address |  | 
+| Name       | Type    | Description |
+| ---------- | ------- | ----------- |
+| prevModule | address |             |
+| module     | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -199,6 +204,7 @@ tion disableModule(address prevModule, address module) public override authorize
     }
 
 ```
+
 </details>
 
 ### execTransactionFromModule
@@ -210,12 +216,12 @@ returns(success bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address |  | 
-| value | uint256 |  | 
-| data | bytes |  | 
-| operation | enum Enum.Operation |  | 
+| Name      | Type                | Description |
+| --------- | ------------------- | ----------- |
+| to        | address             |             |
+| value     | uint256             |             |
+| data      | bytes               |             |
+| operation | enum Enum.Operation |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -233,6 +239,7 @@ tion execTransactionFromModule(
     }
 
 ```
+
 </details>
 
 ### execTransactionFromModuleReturnData
@@ -244,12 +251,12 @@ returns(success bool, returnData bytes)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address |  | 
-| value | uint256 |  | 
-| data | bytes |  | 
-| operation | enum Enum.Operation |  | 
+| Name      | Type                | Description |
+| --------- | ------------------- | ----------- |
+| to        | address             |             |
+| value     | uint256             |             |
+| data      | bytes               |             |
+| operation | enum Enum.Operation |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -281,6 +288,7 @@ tion execTransactionFromModuleReturnData(
     }
 
 ```
+
 </details>
 
 ### isModuleEnabled
@@ -292,9 +300,9 @@ returns(bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| module | address |  | 
+| Name   | Type    | Description |
+| ------ | ------- | ----------- |
+| module | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -305,6 +313,7 @@ tion isModuleEnabled(address module) public view override returns (bool) {
     }
 
 ```
+
 </details>
 
 ### getModulesPaginated
@@ -316,10 +325,10 @@ returns(array address[], next address)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| start | address |  | 
-| pageSize | uint256 |  | 
+| Name     | Type    | Description |
+| -------- | ------- | ----------- |
+| start    | address |             |
+| pageSize | uint256 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -342,10 +351,10 @@ tion getModulesPaginated(address start, uint256 pageSize) external view override
 
         /**
           Because of the argument validation, we can assume that the loop will always iterate over the valid module list values
-          and the `next` variable will either be an enabled module or a sentinel address (signalling the end). 
+          and the `next` variable will either be an enabled module or a sentinel address (signalling the end).
 
           If we haven't reached the end inside the loop, we need to set the next pointer to the last element of the modules array
-          because the `next` variable (which is a module by itself) acting as a pointer to the start of the next page is neither 
+          because the `next` variable (which is a module by itself) acting as a pointer to the start of the next page is neither
           included to the current page, nor will it be included in the next one if you pass it as a start.
         */
         if (next != SENTINEL_MODULES) {
@@ -361,6 +370,7 @@ tion getModulesPaginated(address start, uint256 pageSize) external view override
     }
 
 ```
+
 </details>
 
 ### isContract
@@ -374,9 +384,9 @@ returns(bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| account | address | The address being queried | 
+| Name    | Type    | Description               |
+| ------- | ------- | ------------------------- |
+| account | address | The address being queried |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -395,37 +405,38 @@ tion isContract(address account) internal view returns (bool) {
 }
 
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

@@ -1,6 +1,6 @@
 # Fallback Manager - A contract managing fallback calls made to this contract (FallbackManager.sol)
 
-View Source: [\notForAudit_test_cases\contracts\base\FallbackManager.sol](..\notForAudit_test_cases\contracts\base\FallbackManager.sol)
+View Source: [/notForAudit_test_cases/contracts/base/FallbackManager.sol](../notForAudit_test_cases/contracts/base/FallbackManager.sol)
 
 **↗ Extends: [SelfAuthorized](SelfAuthorized.md), [IFallbackManager](IFallbackManager.md)**
 **↘ Derived Contracts: [Safe](Safe.md)**
@@ -8,6 +8,7 @@ View Source: [\notForAudit_test_cases\contracts\base\FallbackManager.sol](..\not
 **FallbackManager**
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -31,9 +32,9 @@ function internalSetFallbackHandler(address handler) internal nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| handler | address | contract to handle fallback calls. | 
+| Name    | Type    | Description                        |
+| ------- | ------- | ---------------------------------- |
+| handler | address | contract to handle fallback calls. |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -49,7 +50,7 @@ function internalSetFallbackHandler(address handler) internal {
 
             If the fallback method is triggered, the fallback handler appends the msg.sender address to the calldata and calls the fallback handler.
             A potential attacker could call a Safe with the 3 bytes signature of a withdraw function. Since 3 bytes do not create a valid signature,
-            the call would end in a fallback handler. Since it appends the msg.sender address to the calldata, the attacker could craft an address 
+            the call would end in a fallback handler. Since it appends the msg.sender address to the calldata, the attacker could craft an address
             where the first 3 bytes of the previous calldata + the first byte of the address make up a valid function signature. The subsequent call would result in unsanctioned access to Safe's internal protected methods.
             For some reason, solidity matches the first 4 bytes of the calldata to a function signature, regardless if more data follow these 4 bytes.
         */
@@ -63,19 +64,20 @@ function internalSetFallbackHandler(address handler) internal {
         /* solhint-enable no-inline-assembly */
     }
 ```
+
 </details>
 
 ### setFallbackHandler
 
 ```solidity
-function setFallbackHandler(address handler) public nonpayable authorized 
+function setFallbackHandler(address handler) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| handler | address |  | 
+| Name    | Type    | Description |
+| ------- | ------- | ----------- |
+| handler | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -86,9 +88,10 @@ function setFallbackHandler(address handler) public override authorized {
         emit ChangedFallbackHandler(handler);
     }
 ```
+
 </details>
 
-### 
+###
 
 ```solidity
 function () external nonpayable
@@ -96,8 +99,8 @@ function () external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -137,37 +140,38 @@ fallback() external {
         /* solhint-enable no-inline-assembly */
     }
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

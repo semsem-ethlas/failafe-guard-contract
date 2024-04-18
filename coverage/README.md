@@ -1,5 +1,5 @@
 #NOTICE
-This repository belongs to https://eleoslabs.io web3 engineering team and is provisioned for code review and security analysis.
+This repository belongs to https://getfailsafe.com/ web3 engineering team and is provisioned for code review and security analysis.
 
 ## Failsafe Gnosis Safe Guard Smart Contracts
 

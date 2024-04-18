@@ -1,16 +1,17 @@
 # AttestationGuard.sol
 
-View Source: [\contracts\guard\AttestationGuard.sol](..\contracts\guard\AttestationGuard.sol)
+View Source: [/contracts/guard/AttestationGuard.sol](../contracts/guard/AttestationGuard.sol)
 
 **↗ Extends: [BaseGuard](BaseGuard.md), [SignatureDecoder](SignatureDecoder.md), [Ownable](Ownable.md)**
 
 **AttestationGuard**
 
-AttestationGuard reverts if the hash that was signed by quorum of owners 
- has not been attested to by the attestation service. It's presence signifies
-  operational policy requirements having been met.
+AttestationGuard reverts if the hash that was signed by quorum of owners
+has not been attested to by the attestation service. It's presence signifies
+operational policy requirements having been met.
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -26,27 +27,27 @@ bool internal attestationOn;
 
 ## Functions
 
-- [constructor(address _attestationAuthority)](#)
+- [constructor(address \_attestationAuthority)](#)
 - [constructor()](#)
 - [enforceAttestation(bool enforce)](#enforceattestation)
-- [setAttestationAutority(address _attestationAuthority)](#setattestationautority)
-- [setAttestationPolicyThumbprint(bytes32 _attestationPolicyThumbprint)](#setattestationpolicythumbprint)
+- [setAttestationAutority(address \_attestationAuthority)](#setattestationautority)
+- [setAttestationPolicyThumbprint(bytes32 \_attestationPolicyThumbprint)](#setattestationpolicythumbprint)
 - [attestHash(bytes32 hashToApprove)](#attesthash)
 - [checkTransaction(address to, uint256 value, bytes data, enum Enum.Operation operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address payable refundReceiver, bytes signatures, address )](#checktransaction)
 - [checkAfterExecution(bytes32 , bool )](#checkafterexecution)
 - [checkModuleTransaction(address to, uint256 value, bytes data, enum Enum.Operation operation, address module)](#checkmoduletransaction)
 
-### 
+###
 
 ```solidity
-function (address _attestationAuthority) public nonpayable Ownable 
+function (address _attestationAuthority) public nonpayable Ownable
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _attestationAuthority | address |  | 
+| Name                   | Type    | Description |
+| ---------------------- | ------- | ----------- |
+| \_attestationAuthority | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -64,9 +65,10 @@ constructor(address _attestationAuthority) Ownable(tx.origin) {
 
     }
 ```
+
 </details>
 
-### 
+###
 
 ```solidity
 function () external nonpayable
@@ -74,8 +76,8 @@ function () external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -89,6 +91,7 @@ fallback() external {
 
     }
 ```
+
 </details>
 
 ### enforceAttestation
@@ -99,9 +102,9 @@ function enforceAttestation(bool enforce) external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| enforce | bool |  | 
+| Name    | Type | Description |
+| ------- | ---- | ----------- |
+| enforce | bool |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -115,6 +118,7 @@ function enforceAttestation(bool enforce) external {
 
     }
 ```
+
 </details>
 
 ### setAttestationAutority
@@ -125,9 +129,9 @@ function setAttestationAutority(address _attestationAuthority) external nonpayab
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _attestationAuthority | address |  | 
+| Name                   | Type    | Description |
+| ---------------------- | ------- | ----------- |
+| \_attestationAuthority | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -143,6 +147,7 @@ function setAttestationAutority(address _attestationAuthority) external {
 
     }
 ```
+
 </details>
 
 ### setAttestationPolicyThumbprint
@@ -153,9 +158,9 @@ function setAttestationPolicyThumbprint(bytes32 _attestationPolicyThumbprint) ex
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _attestationPolicyThumbprint | bytes32 |  | 
+| Name                          | Type    | Description |
+| ----------------------------- | ------- | ----------- |
+| \_attestationPolicyThumbprint | bytes32 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -173,6 +178,7 @@ function setAttestationPolicyThumbprint(
 
     }
 ```
+
 </details>
 
 ### attestHash
@@ -183,9 +189,9 @@ function attestHash(bytes32 hashToApprove) external nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| hashToApprove | bytes32 |  | 
+| Name          | Type    | Description |
+| ------------- | ------- | ----------- |
+| hashToApprove | bytes32 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -199,6 +205,7 @@ function attestHash(bytes32 hashToApprove) external {
 
     }
 ```
+
 </details>
 
 ### checkTransaction
@@ -209,19 +216,19 @@ function checkTransaction(address to, uint256 value, bytes data, enum Enum.Opera
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address |  | 
-| value | uint256 |  | 
-| data | bytes |  | 
-| operation | enum Enum.Operation |  | 
-| safeTxGas | uint256 |  | 
-| baseGas | uint256 |  | 
-| gasPrice | uint256 |  | 
-| gasToken | address |  | 
-| refundReceiver | address payable |  | 
-| signatures | bytes |  | 
-|  | address |  | 
+| Name           | Type                | Description |
+| -------------- | ------------------- | ----------- |
+| to             | address             |             |
+| value          | uint256             |             |
+| data           | bytes               |             |
+| operation      | enum Enum.Operation |             |
+| safeTxGas      | uint256             |             |
+| baseGas        | uint256             |             |
+| gasPrice       | uint256             |             |
+| gasToken       | address             |             |
+| refundReceiver | address payable     |             |
+| signatures     | bytes               |             |
+|                | address             |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -369,6 +376,7 @@ function checkTransaction(
 
     }
 ```
+
 </details>
 
 ### checkAfterExecution
@@ -379,10 +387,10 @@ function checkAfterExecution(bytes32 , bool ) external view
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-|  | bytes32 |  | 
-|  | bool |  | 
+| Name | Type    | Description |
+| ---- | ------- | ----------- |
+|      | bytes32 |             |
+|      | bool    |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -390,6 +398,7 @@ function checkAfterExecution(bytes32 , bool ) external view
 ```javascript
 function checkAfterExecution(bytes32, bool) external view override {}
 ```
+
 </details>
 
 ### checkModuleTransaction
@@ -403,13 +412,13 @@ returns(bytes32)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| to | address | Destination address of Safe transaction. | 
-| value | uint256 | Ether value of Safe transaction. | 
-| data | bytes | Data payload of Safe transaction. | 
-| operation | enum Enum.Operation | Operation type of Safe transaction. | 
-| module | address | Module executing the transaction. | 
+| Name      | Type                | Description                              |
+| --------- | ------------------- | ---------------------------------------- |
+| to        | address             | Destination address of Safe transaction. |
+| value     | uint256             | Ether value of Safe transaction.         |
+| data      | bytes               | Data payload of Safe transaction.        |
+| operation | enum Enum.Operation | Operation type of Safe transaction.      |
+| module    | address             | Module executing the transaction.        |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -429,37 +438,38 @@ function checkModuleTransaction(
 
     ) external override returns (bytes32) {}
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)

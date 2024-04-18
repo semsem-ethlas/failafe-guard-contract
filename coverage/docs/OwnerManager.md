@@ -1,6 +1,6 @@
 # OwnerManager - Manages Safe owners and a threshold to authorize transactions. (OwnerManager.sol)
 
-View Source: [\notForAudit_test_cases\contracts\base\OwnerManager.sol](..\notForAudit_test_cases\contracts\base\OwnerManager.sol)
+View Source: [/notForAudit_test_cases/contracts/base/OwnerManager.sol](../notForAudit_test_cases/contracts/base/OwnerManager.sol)
 
 **↗ Extends: [SelfAuthorized](SelfAuthorized.md), [IOwnerManager](IOwnerManager.md)**
 **↘ Derived Contracts: [Safe](Safe.md)**
@@ -8,9 +8,10 @@ View Source: [\notForAudit_test_cases\contracts\base\OwnerManager.sol](..\notFor
 **OwnerManager**
 
 Uses a linked list to store the owners because the code generate by the solidity compiler
-      is more efficient than using a dynamic array.
+is more efficient than using a dynamic array.
 
 ## Contract Members
+
 **Constants & Variables**
 
 ```js
@@ -23,11 +24,11 @@ uint256 internal threshold;
 
 ## Functions
 
-- [setupOwners(address[] _owners, uint256 _threshold)](#setupowners)
-- [addOwnerWithThreshold(address owner, uint256 _threshold)](#addownerwiththreshold)
-- [removeOwner(address prevOwner, address owner, uint256 _threshold)](#removeowner)
+- [setupOwners(address[] \_owners, uint256 \_threshold)](#setupowners)
+- [addOwnerWithThreshold(address owner, uint256 \_threshold)](#addownerwiththreshold)
+- [removeOwner(address prevOwner, address owner, uint256 \_threshold)](#removeowner)
 - [swapOwner(address prevOwner, address oldOwner, address newOwner)](#swapowner)
-- [changeThreshold(uint256 _threshold)](#changethreshold)
+- [changeThreshold(uint256 \_threshold)](#changethreshold)
 - [getThreshold()](#getthreshold)
 - [isOwner(address owner)](#isowner)
 - [getOwners()](#getowners)
@@ -42,10 +43,10 @@ function setupOwners(address[] _owners, uint256 _threshold) internal nonpayable
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _owners | address[] | List of Safe owners. | 
-| _threshold | uint256 | Number of required confirmations for a Safe transaction. | 
+| Name        | Type      | Description                                              |
+| ----------- | --------- | -------------------------------------------------------- |
+| \_owners    | address[] | List of Safe owners.                                     |
+| \_threshold | uint256   | Number of required confirmations for a Safe transaction. |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -76,20 +77,21 @@ function setupOwners(address[] memory _owners, uint256 _threshold) internal {
         threshold = _threshold;
     }
 ```
+
 </details>
 
 ### addOwnerWithThreshold
 
 ```solidity
-function addOwnerWithThreshold(address owner, uint256 _threshold) public nonpayable authorized 
+function addOwnerWithThreshold(address owner, uint256 _threshold) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| owner | address |  | 
-| _threshold | uint256 |  | 
+| Name        | Type    | Description |
+| ----------- | ------- | ----------- |
+| owner       | address |             |
+| \_threshold | uint256 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -108,21 +110,22 @@ function addOwnerWithThreshold(address owner, uint256 _threshold) public overrid
         if (threshold != _threshold) changeThreshold(_threshold);
     }
 ```
+
 </details>
 
 ### removeOwner
 
 ```solidity
-function removeOwner(address prevOwner, address owner, uint256 _threshold) public nonpayable authorized 
+function removeOwner(address prevOwner, address owner, uint256 _threshold) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| prevOwner | address |  | 
-| owner | address |  | 
-| _threshold | uint256 |  | 
+| Name        | Type    | Description |
+| ----------- | ------- | ----------- |
+| prevOwner   | address |             |
+| owner       | address |             |
+| \_threshold | uint256 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -142,21 +145,22 @@ function removeOwner(address prevOwner, address owner, uint256 _threshold) publi
         if (threshold != _threshold) changeThreshold(_threshold);
     }
 ```
+
 </details>
 
 ### swapOwner
 
 ```solidity
-function swapOwner(address prevOwner, address oldOwner, address newOwner) public nonpayable authorized 
+function swapOwner(address prevOwner, address oldOwner, address newOwner) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| prevOwner | address |  | 
-| oldOwner | address |  | 
-| newOwner | address |  | 
+| Name      | Type    | Description |
+| --------- | ------- | ----------- |
+| prevOwner | address |             |
+| oldOwner  | address |             |
+| newOwner  | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -177,19 +181,20 @@ function swapOwner(address prevOwner, address oldOwner, address newOwner) public
         emit AddedOwner(newOwner);
     }
 ```
+
 </details>
 
 ### changeThreshold
 
 ```solidity
-function changeThreshold(uint256 _threshold) public nonpayable authorized 
+function changeThreshold(uint256 _threshold) public nonpayable authorized
 ```
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| _threshold | uint256 |  | 
+| Name        | Type    | Description |
+| ----------- | ------- | ----------- |
+| \_threshold | uint256 |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -204,6 +209,7 @@ function changeThreshold(uint256 _threshold) public override authorized {
         emit ChangedThreshold(threshold);
     }
 ```
+
 </details>
 
 ### getThreshold
@@ -215,8 +221,8 @@ returns(uint256)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -226,6 +232,7 @@ function getThreshold() public view override returns (uint256) {
         return threshold;
     }
 ```
+
 </details>
 
 ### isOwner
@@ -237,9 +244,9 @@ returns(bool)
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
-| owner | address |  | 
+| Name  | Type    | Description |
+| ----- | ------- | ----------- |
+| owner | address |             |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -249,6 +256,7 @@ function isOwner(address owner) public view override returns (bool) {
         return !(owner == SENTINEL_OWNERS || owners[owner] == address(0));
     }
 ```
+
 </details>
 
 ### getOwners
@@ -260,8 +268,8 @@ returns(address[])
 
 **Arguments**
 
-| Name        | Type           | Description  |
-| ------------- |------------- | -----|
+| Name | Type | Description |
+| ---- | ---- | ----------- |
 
 <details>
 	<summary><strong>Source Code</strong></summary>
@@ -281,37 +289,38 @@ function getOwners() public view override returns (address[] memory) {
         return array;
     }
 ```
+
 </details>
 
 ## Contracts
 
-* [AttestationGuard](AttestationGuard.md)
-* [AttestationGuardFactory](AttestationGuardFactory.md)
-* [BaseGuard](BaseGuard.md)
-* [Context](Context.md)
-* [Enum](Enum.md)
-* [ErrorMessage](ErrorMessage.md)
-* [Executor](Executor.md)
-* [FallbackManager](FallbackManager.md)
-* [Guard](Guard.md)
-* [GuardManager](GuardManager.md)
-* [IERC165](IERC165.md)
-* [IFallbackManager](IFallbackManager.md)
-* [IGuardManager](IGuardManager.md)
-* [IModuleManager](IModuleManager.md)
-* [IOwnerManager](IOwnerManager.md)
-* [ISafe](ISafe.md)
-* [ISignatureValidator](ISignatureValidator.md)
-* [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
-* [ModuleManager](ModuleManager.md)
-* [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
-* [Ownable](Ownable.md)
-* [OwnerManager](OwnerManager.md)
-* [Safe](Safe.md)
-* [SafeL2](SafeL2.md)
-* [SafeMath](SafeMath.md)
-* [SecuredTokenTransfer](SecuredTokenTransfer.md)
-* [SelfAuthorized](SelfAuthorized.md)
-* [SignatureDecoder](SignatureDecoder.md)
-* [Singleton](Singleton.md)
-* [StorageAccessible](StorageAccessible.md)
+- [AttestationGuard](AttestationGuard.md)
+- [AttestationGuardFactory](AttestationGuardFactory.md)
+- [BaseGuard](BaseGuard.md)
+- [Context](Context.md)
+- [Enum](Enum.md)
+- [ErrorMessage](ErrorMessage.md)
+- [Executor](Executor.md)
+- [FallbackManager](FallbackManager.md)
+- [Guard](Guard.md)
+- [GuardManager](GuardManager.md)
+- [IERC165](IERC165.md)
+- [IFallbackManager](IFallbackManager.md)
+- [IGuardManager](IGuardManager.md)
+- [IModuleManager](IModuleManager.md)
+- [IOwnerManager](IOwnerManager.md)
+- [ISafe](ISafe.md)
+- [ISignatureValidator](ISignatureValidator.md)
+- [ISignatureValidatorConstants](ISignatureValidatorConstants.md)
+- [ModuleManager](ModuleManager.md)
+- [NativeCurrencyPaymentFallback](NativeCurrencyPaymentFallback.md)
+- [Ownable](Ownable.md)
+- [OwnerManager](OwnerManager.md)
+- [Safe](Safe.md)
+- [SafeL2](SafeL2.md)
+- [SafeMath](SafeMath.md)
+- [SecuredTokenTransfer](SecuredTokenTransfer.md)
+- [SelfAuthorized](SelfAuthorized.md)
+- [SignatureDecoder](SignatureDecoder.md)
+- [Singleton](Singleton.md)
+- [StorageAccessible](StorageAccessible.md)
