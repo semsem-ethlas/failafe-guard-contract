@@ -9,13 +9,13 @@ import {SignatureDecoder} from "../external/SignatureDecoder.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @notice AttestationGuard reverts if the hash that was signed by quorum of owners 
+ * @notice AttestationGuard reverts if the hash that was signed by quorum of owners
  * has not been attested to by the attestation service. It's presence signifies
  *  operational policy requirements having been met.
  */
 contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
     using SafeMath for uint256;
-    
+
     address public attestationAuthority;
     bool attestationOn;
 
@@ -24,7 +24,10 @@ contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
     bytes32 public attestationPolicyThumbprint;
 
     constructor(address _attestationAuthority) Ownable(tx.origin) {
-        require(_attestationAuthority != address(0), "must use a valid attestation addr");
+        require(
+            _attestationAuthority != address(0),
+            "must use a valid attestation addr"
+        );
         attestationAuthority = _attestationAuthority;
         attestationOn = true;
         // attestationPolicyThumbprint = _attestationPolicyThumbprint;
@@ -42,7 +45,10 @@ contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
     }
 
     function setAttestationAutority(address _attestationAuthority) external {
-        require(_attestationAuthority != address(0), "must use a valid attestation addr");
+        require(
+            _attestationAuthority != address(0),
+            "must use a valid attestation addr"
+        );
         require(msg.sender == attestationAuthority, "caller not authorized");
         attestationAuthority = _attestationAuthority;
     }
@@ -102,18 +108,21 @@ contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
         );
 
         if (attestedHashes[attestationAuthority][txHash] != 0) {
-            return;  // attestion hash found, permit execution to proceed
+            return; // attestion hash found, permit execution to proceed
         }
         // fallback, check if attestation address is one of the owners
         uint256 threshold = ISafe(msg.sender).getThreshold();
-        
-        require (signatures.length >= threshold.mul(65),  "unexpected signature stream");
+
+        require(
+            signatures.length >= threshold.mul(65),
+            "unexpected signature stream"
+        );
 
         uint256 v;
         bytes32 r;
         bytes32 s;
         address currentOwner;
-      
+
         for (uint256 i = 0; i < threshold; i++) {
             (v, r, s) = signatureSplit(signatures, i);
 
@@ -122,7 +131,6 @@ contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
                 // When handling contract signatures the address of the contract is encoded into r
                 // sig verification already done by Safe contract
                 currentOwner = address(uint160(uint256(r)));
-
             } else if (v == 1) {
                 // If v is 1 then it is an approved hash
                 // When handling approved hashes the address of the approver is encoded into r
@@ -130,14 +138,24 @@ contract AttestationGuard is BaseGuard, SignatureDecoder, Ownable {
             } else if (v > 30) {
                 // If v > 30 then default va (27,28) has been adjusted for eth_sign flow
                 // To support eth_sign and similar we adjust v and hash the messageHash with the Ethereum message prefix before applying ecrecover
-                currentOwner = ecrecover(keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", txHash)), uint8(v - 4), r, s);
+                currentOwner = ecrecover(
+                    keccak256(
+                        abi.encodePacked(
+                            "\x19Ethereum Signed Message:\n32",
+                            txHash
+                        )
+                    ),
+                    uint8(v - 4),
+                    r,
+                    s
+                );
             } else {
                 // Default is the ecrecover flow with the provided data hash
                 // Use ecrecover with the messageHash for EOA signatures
                 currentOwner = ecrecover(txHash, uint8(v), r, s);
             }
-            
-            if (currentOwner == attestationAuthority){
+
+            if (currentOwner == attestationAuthority) {
                 // attestation authority vouched for this hash
                 // can permit execution to proceed
                 return;
